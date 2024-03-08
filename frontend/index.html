@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script type="module" src="main.js" defer></script>
+</head>
+<body>
+
+    <!-- This is the page that promts users to login or signup -->
+    <section id="not-logged-in">
+        <div class="page-container">
+            <div>
+                <h1>Sign into the app to chat with others</h1>
+                <div class="link-container">
+                    <a href="./login/login.html" class="login-btn">Login</a>
+                    <a href="./signup/signup.html" class="signup-link">Signup</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- This is the main application -->
+    <section id="is-logged-in">
+        <div class="app-container">
+            <div>
+                <div class="header-container">
+                    <h1>Chat App</h1>
+                    <button id="logout-btn">Logout</button>
+                </div>
+                <div class="chat-box">
+                    <!-- list of messages -->
+                    <ul id="messages"></ul>
+                </div>
+                <div class="flex-container">
+                    <form action="#" id="chat-form">
+                        <input type="text" class="input-box" placeholder="Enter Here!">
+                        <button type="submit" class="send-btn">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,9 @@
+backend/.env
+venv
+chat_app_ERD.drawio
+.$chat app ERD.drawio.bkp
+backend/__pycache__
+backend/controllers/__pycache__
+backend/helpers/__pycache__
+backend/models/__pycache__
+frontend/node_modules

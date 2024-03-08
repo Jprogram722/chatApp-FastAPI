@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+html{
+    background-color: #1e3a8a;
+    color: #EEEDFF;
+    font-family: "Outfit", sans-serif;
+}
+
+button{
+    font-family: "Outfit", sans-serif;
+}
+
+input{
+    font-family: "Outfit", sans-serif;
+}
+
+.page-container, .app-container, .header-container{
+    display: flex;
+    justify-content: center;
+}
+
+.link-container{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-btn{
+    padding: 10px;
+    background-color: #EEEDFF;
+    border: none;
+    text-decoration: none;
+    border-radius: 10px;
+    color: #4f5177;
+}
+
+.login-btn:hover{
+    background-color: #cfcedf;
+}
+
+.signup-link{
+    padding: 10px;
+    text-decoration: none;
+    color: #EEEDFF;
+    border: none;
+    border-radius: 10px;
+    background-color: #314e9f;
+}
+
+.signup-link:hover{
+    background-color: #425fad;
+}
+
+label{
+    color:#EEEDFF;
+}
+
+.login-container, .signup-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px; 
+}
+
+.inner-container{
+    border: 3px solid #EEEDFF;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.text-input{
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    width: 300px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.label-text{
+    padding-bottom: 10px;
+}
+
+.title-text{
+    font-size: larger;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.submit-btn{
+    padding: 10px;
+}
+
+.err-msg{
+    display: none;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #9f1239;
+}
+
+.chat-box{
+    background-color: #425fad;
+    width: 500px;
+    height: 500px;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll;
+}
+
+.input-box{
+    background-color: #4f5177;
+    color: #EEEDFF;
+    font-size: 14pt;
+    border: none;
+    padding: 10px;
+    width: 400px;
+}
+
+.flex-container{
+    display: flex;
+}
+
+.send-btn{
+    width: 80px;
+    height: 40px;
+    background-color: #CEA716;
+    color:#1e3a8a;
+    border: none;
+    cursor: pointer;
+}
+
+.send-btn:hover{
+    background-color: #b89414;
+}
+
+#logout-btn{
+    height: 40px;
+    cursor: pointer;
+}
+
+.header-container{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message{
+    position: relative;
+    top: 10px;
+    left: -30px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #1e3a8a;
+    width: 90%;
+    list-style-type: none;
+}
