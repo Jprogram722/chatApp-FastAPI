@@ -2,7 +2,7 @@ import mysql.connector as mysql_conn
 from dotenv import load_dotenv
 import os
 
-load_dotenv("../.env")
+load_dotenv()
 
 def DBConnect():
     try:

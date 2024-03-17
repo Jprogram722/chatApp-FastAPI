@@ -154,3 +154,8 @@ label{
     width: 90%;
     list-style-type: none;
 }
+
+img{
+    height: 50px;
+    border-radius: 10px;
+}

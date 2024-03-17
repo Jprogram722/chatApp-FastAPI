@@ -33,6 +33,62 @@ import axios from "axios";
         }
     }
 
+    const getUserImg = async (username) => {
+
+        const { data } = await axios.get(`http://${networks[0]}:8080/get-image/${username}`);
+
+        // get the image container 
+        const imgContainer = document.querySelector("#img-container");
+
+        // create img tag
+        let img = document.createElement('img');
+        // get img source
+        img.src = data.image;
+        // specify an alt for the image
+        img.alt = "img";
+        // append to the image to the container
+        imgContainer.appendChild(img);
+    }
+
+
+    const submitUserImg = async (event) => {
+        // stop page from reloading
+        event.preventDefault();
+        
+        // init a form data object
+        const formData = new FormData();
+
+        // get the container that holds the value of the image
+        const img = document.querySelector("#img-data");
+
+        // put the image info into the form data
+        formData.append(
+            "image", // content type
+            img.files[0], // file
+            img.files[0].name, // file name
+            {'type': 'multipart/form-data'} // request headers
+        );
+
+
+        try{
+            // sends the image to the sever
+            const res = await axios.post(
+                `http://${networks[0]}:8080/select-image/${localStorage.getItem("Username")}`,
+                formData,
+            );
+
+            // prints the response to the console
+            console.log(res.data);
+
+            // refreshes the page
+            window.location.reload();
+        }
+        catch(err){
+            console.log(err);
+        }
+
+    }
+
     // get the sections on the index page
     const notLoggedIn = document.querySelector("#not-logged-in");
     const loggedIn = document.querySelector("#is-logged-in");
@@ -43,15 +99,20 @@ import axios from "axios";
         notLoggedIn.style.display = "none";
         loggedIn.style.display = "block";
 
+        // get the chat form
+        const chatForm = document.querySelector("#chat-form");
         // grab the logout button from the dom
         const logoutBtn = document.querySelector("#logout-btn");
+        // grab the the image form
+        const imgForm = document.querySelector("#img-form");
 
         // attach the logout function to the logout button
-        logoutBtn.addEventListener( 'click', logout);
+        logoutBtn.addEventListener('click', logout);
+        // attach the submit form function to the img form
+        imgForm.addEventListener('submit', submitUserImg);
 
-        // get the 
-        let chatForm = document.querySelector("#chat-form");
-
+        // get the users image and the messages sent to the chat
+        getUserImg(localStorage.getItem("Username"));
         StoredMessages();
 
         // create the websocket

@@ -5,7 +5,7 @@ Description: This is the file that funs the api it handles all the routing for d
 """
 
 # import modules
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, UploadFile
 from helpers.ConnManager import ConnectionManager
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
@@ -14,7 +14,9 @@ from controllers.controllers import (
     insertUserIntoDB, 
     verifyLogin, 
     insertMessageIntoDB, 
-    retreiveMessages
+    retreiveMessages,
+    getUserImg,
+    InsertImgPathIntoDB
 )
 
 # init a fastapi api
@@ -38,25 +40,44 @@ manager = ConnectionManager()
 
 # endpoint for creating a user
 @app.post('/signup/')
-def createUser(user_info: UserSchema):
+def createUser(user_info: UserSchema) -> dict:
     res = insertUserIntoDB(user_info)
     return res
 
 # endpoint for logging in
 @app.post('/login/')
-def LoginUser(user_info: UserSchema):
+def LoginUser(user_info: UserSchema) -> dict:
     res = verifyLogin(user_info)
     return res
 
 # endpoint for sending a message
 @app.post('/send-message/')
-def receiveMessage(message_info: MessageSchema):
+def receiveMessage(message_info: MessageSchema) -> None:
     insertMessageIntoDB(message_info)
 
 # endpoint for getting messages
 @app.get('/get-messages/')
-def getMessages():
+def getMessages() -> list[dict]:
     return retreiveMessages()
+
+@app.post('/select-image/{username}')
+async def selectImage(image: UploadFile, username: str):
+    # await the image data
+    data = await image.read()
+    # get the path to store the file
+    path = f"../frontend/images/{image.filename}"
+    # open the path
+    with open(path, "wb") as file:
+        # write the image data to the file
+        file.write(data)
+
+    InsertImgPathIntoDB(image.filename, username)
+    
+    return {"images": image.filename, "username": username}
+
+@app.get('/get-image/{username}')
+def getImage(username: str):
+    return getUserImg(username)
     
 # endpoint for the websockets
 @app.websocket("/ws/{username}")

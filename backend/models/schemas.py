@@ -3,9 +3,10 @@ from datetime import datetime
 from pydantic import BaseModel
 
 class UserSchema(BaseModel):
-    id: int | None = None,
+    id: int | None = None
     username: str
     password: str
+    img_path: str | None = None
 
     class Config:
         from_attributes = True

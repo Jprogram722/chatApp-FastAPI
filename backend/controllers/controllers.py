@@ -1,6 +1,7 @@
 # This file will be used for the controllers
 import sys
 
+# allows us to get files from the helpers folder
 sys.path.insert(1, "../helpers/")
 
 from models.schemas import UserSchema, MessageSchema
@@ -106,7 +107,12 @@ def insertMessageIntoDB(message_info: MessageSchema) -> None:
     except Exception as err:
         print(err)
 
+
+
 def retreiveMessages():
+    """
+    This function will get the messages stored in the mysql database
+    """
     try:
 
         messages = []
@@ -137,6 +143,47 @@ def retreiveMessages():
     except Exception as err:
         print(err)
         return {"messages": None, "status": "Error"}
-        
 
+
+
+def getUserImg(username: str):
+    """
+    This function is used to retreive the users image
+    """
+
+    try:
+        conn, cursor = DBConnect()
+
+        cursor.execute(f"SELECT img_path FROM users WHERE username = '{username}'")
+
+        image = cursor.fetchone()[0]
+
+        conn.close()
+
+        return {"image": image, "status": "Success"}
+
+    except Exception as err:
+        print(err)
+        return {"image": None, "status": "Error"}
+
+
+def InsertImgPathIntoDB(file_name: str, username: str) -> None:
+    try:
+        img_path = f"./images/{file_name}"
+
+        conn, cursor = DBConnect();
+
+        cursor.execute(
+        f"""
+        UPDATE users SET img_path = '{img_path}' WHERE username = '{username}'
+        """
+        )
+
+        conn.commit()
+
+        conn.close()
+
+    
+    except Exception as err:
+        print(err)
 
